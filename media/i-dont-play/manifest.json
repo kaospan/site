@@ -1,0 +1,28 @@
+{
+  "project": "SPEAK ON",
+  "artist": "PEAKSON",
+  "title": "I DON'T PLAY",
+  "status": "media upload pending manual binary upload",
+  "gh_pages_target_url": "https://repoisrael.github.io/site/media/i-dont-play/",
+  "files_prepared_locally": [
+    {
+      "type": "audio_preview",
+      "filename": "I DON'T PLAY the game.mp3",
+      "recommended_repo_path": "media/i-dont-play/audio/i-dont-play-the-game.mp3",
+      "size_bytes": 3731150,
+      "sha256": "3d6a6880ebcf03eea3d84ee555af24a50ff2122eb0f8798942b52a3da88a1394"
+    },
+    {
+      "type": "cover_image",
+      "filename": "peakson-i-dont-play-cover.jpg",
+      "recommended_repo_path": "media/i-dont-play/covers/peakson-i-dont-play-cover.jpg",
+      "size_bytes": 433078,
+      "sha256": "7938c7adbd65d2db997282a3a6d1ebc32ae4a646b3db509c795f77ca83efbcfe"
+    }
+  ],
+  "notes": [
+    "Use MP3 for GitHub Pages preview; keep WAV masters outside GitHub or in a release/storage bucket.",
+    "WAV masters in the sandbox are 28-32 MB each and are better treated as masters, not web preview assets.",
+    "Once binaries are uploaded to the recommended paths, the page media/i-dont-play/index.html can reference them directly."
+  ]
+}
