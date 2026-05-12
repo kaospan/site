@@ -4,40 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#070707" />
-    <title>PEAK Universe — Canon Site</title>
+    <title>PEAK Universe — Story Map</title>
     <style>
-      body{margin:0;background:#070707;color:#f7f7f7;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-      #root{min-height:100vh}
-      .page{max-width:1100px;margin:0 auto;padding:48px 20px}
-      .hero{display:grid;grid-template-columns:1fr;gap:18px;min-height:72vh;align-content:center}
-      .card{border:1px solid #333;border-radius:24px;background:#141414;padding:24px;box-shadow:0 22px 80px rgba(0,0,0,.45)}
-      .eyebrow{color:#fde047;text-transform:uppercase;letter-spacing:.22em;font-size:12px}
-      h1{font-size:clamp(44px,8vw,92px);line-height:.9;letter-spacing:-.06em;margin:10px 0 18px}
-      h2{font-size:clamp(28px,4vw,46px);line-height:1;margin:0 0 12px}
-      p{color:#e8e8e8;line-height:1.65;max-width:760px}
-      .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-      .badge{border:1px solid #333;border-radius:999px;padding:7px 10px;font-size:12px;color:#ddd}
-      .released{color:#86efac;border-color:rgba(134,239,172,.55);background:rgba(34,197,94,.12)}
+      html{scroll-behavior:smooth}body{margin:0;background:#070707;color:#f7f7f7;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}#root{min-height:100vh}.page{max-width:1120px;margin:0 auto;padding:28px 20px 56px}.nav{position:sticky;top:0;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:14px 0;margin-bottom:34px;background:rgba(7,7,7,.84);border-bottom:1px solid #333;backdrop-filter:blur(12px)}.brand{font-weight:900;letter-spacing:.18em}.links{display:flex;gap:12px;flex-wrap:wrap}.links a{color:#fde047;text-decoration:none}.hero{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;padding:26px 0 42px}.card{border:1px solid #333;border-radius:24px;background:#141414;padding:22px;box-shadow:0 22px 80px rgba(0,0,0,.45)}.eyebrow{color:#fde047;text-transform:uppercase;letter-spacing:.22em;font-size:12px}h1{font-size:clamp(44px,8vw,92px);line-height:.9;letter-spacing:-.06em;margin:10px 0 18px}h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:8px 0 14px}h3{font-size:22px;margin:0 0 10px}p,li{color:#e8e8e8;line-height:1.65}.muted{color:#b7b7b7}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.timeline{display:grid;gap:12px}.step{display:grid;grid-template-columns:46px 1fr;gap:14px;border:1px solid #333;border-radius:22px;background:#ffffff0d;padding:18px}.num{width:38px;height:38px;border-radius:999px;background:#fde047;color:#070707;display:grid;place-items:center;font-weight:900}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{border:1px solid #333;border-radius:999px;padding:7px 10px;font-size:12px;color:#ddd}.released{color:#86efac;border-color:rgba(134,239,172,.55);background:rgba(34,197,94,.12)}section{margin-bottom:58px;scroll-margin-top:90px}@media(max-width:900px){.hero,.grid,.grid4{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}}
     </style>
   </head>
   <body>
     <div id="root">
       <main class="page">
+        <nav class="nav">
+          <div><div class="brand">PEAK UNIVERSE</div><div class="muted">clear story map</div></div>
+          <div class="links"><a href="#story">Story</a><a href="#roles">Roles</a><a href="#order">Connections</a><a href="#releases">Releases</a></div>
+        </nav>
+
         <section class="hero">
           <div>
             <p class="eyebrow">current canon</p>
             <h1>I Don’t Play is released.</h1>
-            <p>The project is past Reckless. Reckless is draft lineage; I Don’t Play is the active public PEAKSON statement.</p>
-            <div class="badges">
-              <span class="badge released">PEAKSON</span>
-              <span class="badge">post-release phase</span>
-              <span class="badge">canon corrected</span>
-            </div>
+            <p>PEAKSON, kaospen, and KAPONES look like separate artists. Under the surface, they are three expressions of one pressure system: control, evidence, and body memory.</p>
+            <div class="badges"><span class="badge released">PEAKSON</span><span class="badge">post-release phase</span><span class="badge">Reckless = draft history</span></div>
           </div>
           <div class="card">
-            <p class="eyebrow">release archive</p>
-            <h2>Vite app source is in repo.</h2>
-            <p>This static shell prevents a blank page while the GitHub Pages build/deploy path is being completed.</p>
+            <p class="eyebrow">simple explanation</p>
+            <h2>The public story is easy first.</h2>
+            <p>Each artist should make sense on their own. The hidden story is discovered later through release order, title casing, repeated objects, files, riddles, and companion notes.</p>
+          </div>
+        </section>
+
+        <section id="story">
+          <p class="eyebrow">what this is</p>
+          <h2>A clean public image starts to crack.</h2>
+          <div class="grid">
+            <div class="card"><p class="eyebrow">surface</p><h3>Separate artists.</h3><p>PEAKSON, kaospen, and KAPONES have different sounds, roles, and public identities.</p></div>
+            <div class="card"><p class="eyebrow">hidden layer</p><h3>One fracture.</h3><p>The deeper story suggests they are connected expressions of one pressure system.</p></div>
+            <div class="card"><p class="eyebrow">status</p><h3>Current center: I Don’t Play.</h3><p>Reckless is development lineage. I Don’t Play is the released PEAKSON statement.</p></div>
+          </div>
+        </section>
+
+        <section id="roles">
+          <p class="eyebrow">who is who</p>
+          <h2>Four roles, explained simply.</h2>
+          <div class="grid4">
+            <div class="card"><p class="eyebrow">control</p><h3>PEAKSON</h3><p>The public peak: still, selective, dominant, and hard to move. He does not chase.</p></div>
+            <div class="card"><p class="eyebrow">evidence</p><h3>kaospen</h3><p>The system witness: lowercase, analytical, coded, and focused on what the mask is hiding.</p></div>
+            <div class="card"><p class="eyebrow">body memory</p><h3>KAPONES</h3><p>The physical lane: money, rhythm, status, nightlife, and the feeling that keeps returning.</p></div>
+            <div class="card"><p class="eyebrow">truth test</p><h3>The Flame / NOESKAP</h3><p>Not a prize. The catalyst that forces each persona to reveal itself.</p></div>
+          </div>
+        </section>
+
+        <section id="order">
+          <p class="eyebrow">how it connects</p>
+          <h2>The story in order.</h2>
+          <div class="timeline">
+            <div class="step"><div class="num">1</div><div><h3>kaospen opens the system.</h3><p>MIRROR MOUTH and under my skin begin inside the mind. The mirror speaks, fear and desire enter the body, and the system starts documenting damage.</p></div></div>
+            <div class="step"><div class="num">2</div><div><h3>kaospen makes control cinematic.</h3><p>LOW LIGHT and sunrise is a liar show that light does not fix anything. It either hides the bruise or reveals it as evidence.</p></div></div>
+            <div class="step"><div class="num">3</div><div><h3>PEAKSON goes public.</h3><p>The Peak presents the controlled mask: status, silence, stillness, and dominance.</p></div></div>
+            <div class="step"><div class="num">4</div><div><h3>kaospen answers the mask.</h3><p>under.COVER. turns the clean image into evidence and questions what PEAKSON performs.</p></div></div>
+            <div class="step"><div class="num">5</div><div><h3>PEAKSON refuses the game.</h3><p>I Don’t Play is the current public statement. The refusal itself is a move.</p></div></div>
+            <div class="step"><div class="num">6</div><div><h3>KAPONES brings the body back.</h3><p>Can’t Shake Me Off is planned as the body-memory lane: rhythm, status, movement, and residue.</p></div></div>
+          </div>
+        </section>
+
+        <section id="releases">
+          <p class="eyebrow">release archive</p>
+          <h2>Each release has one clear job.</h2>
+          <div class="grid">
+            <div class="card"><h3>I Don’t Play</h3><p class="muted">PEAKSON · Released</p><p>Current public statement. Controlled, direct, serious.</p></div>
+            <div class="card"><h3>The Peak</h3><p class="muted">PEAKSON · Released</p><p>The clean mask: silence, status, stillness, pressure.</p></div>
+            <div class="card"><h3>under.COVER.</h3><p class="muted">kaospen · Released</p><p>The system response that turns the mask into evidence.</p></div>
+            <div class="card"><h3>LOW LIGHT</h3><p class="muted">kaospen · Released</p><p>Control becomes cinematic and seductive.</p></div>
+            <div class="card"><h3>sunrise is a liar</h3><p class="muted">kaospen · Released</p><p>Daylight reveals damage instead of healing it.</p></div>
+            <div class="card"><h3>Can’t Shake Me Off</h3><p class="muted">KAPONES feat. kaospen · Planned</p><p>The body-memory lane and KAPONES launch direction.</p></div>
           </div>
         </section>
       </main>
