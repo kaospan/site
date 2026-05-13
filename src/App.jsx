@@ -171,7 +171,7 @@ function AlbumStatus({ album }) {
       </div>
       <div className="stat-grid">
         <ReadCard label="released">{stats.released} / {album.totalTracks}</ReadCard>
-        <ReadCard label="planned">{stats.planned}</ReadCard>
+        <ReadCard label="planned / locked">{stats.planned}</ReadCard>
         <ReadCard label="remain to release">{stats.remainingToRelease}</ReadCard>
         <ReadCard label="remain to write">{stats.remainingToWrite}</ReadCard>
       </div>
@@ -180,9 +180,10 @@ function AlbumStatus({ album }) {
           <li key={`${album.id}-${track.n}`}>
             <div>
               <strong>{track.n}. {track.title}</strong>
+              <p className="track-date">Release date: {track.releaseDate}</p>
               <p>{track.role}</p>
             </div>
-            <Badge tone={track.status === 'Released' ? 'released' : track.status === 'Planned' ? 'planned' : 'default'}>{track.status}</Badge>
+            <Badge tone={track.status === 'Released' ? 'released' : track.status === 'Planned' || track.status === 'Locked soon' ? 'planned' : 'default'}>{track.status}</Badge>
           </li>
         ))}
       </ol>
@@ -214,12 +215,12 @@ function ReleaseCard({ release, onSelect, active }) {
   return (
     <article className={`card release-card ${active ? 'active-card' : ''}`}>
       <div className="badges">
-        <Badge tone={release.status === 'Released' ? 'released' : 'planned'}>{release.status}</Badge>
+        <Badge tone={release.status === 'Released' ? 'released' : release.status === 'Planned' || release.status === 'Locked soon' ? 'planned' : 'default'}>{release.status}</Badge>
         <Badge>{release.artist}</Badge>
       </div>
       <p className="eyebrow">{release.phase}</p>
       <h3>{release.title}</h3>
-      <p className="muted">{release.date}</p>
+      <p className="muted">Release date: {release.releaseDate ?? release.date}</p>
       <p>{release.job ?? release.summary}</p>
       <button onClick={() => onSelect(release.id)}>Open details</button>
     </article>
@@ -235,17 +236,17 @@ function ReadCard({ label, children }) {
   );
 }
 
-function ReleaseDetail({ release }) {
+function ReleaseDetail({ release, compact = false }) {
   const [tab, setTab] = useState('meaning');
   return (
-    <section className="card detail-card">
+    <section className={`card detail-card ${compact ? 'inline-detail' : ''}`} id={compact ? 'selected-release-detail' : undefined}>
       <div className="badges">
-        <Badge tone={release.status === 'Released' ? 'released' : 'planned'}>{release.status}</Badge>
+        <Badge tone={release.status === 'Released' ? 'released' : release.status === 'Planned' || release.status === 'Locked soon' ? 'planned' : 'default'}>{release.status}</Badge>
         <Badge>{release.artist}</Badge>
         <Badge>{release.phase}</Badge>
       </div>
       <h2>{release.title}</h2>
-      <p className="muted">{release.date}</p>
+      <p className="muted">Release date: {release.releaseDate ?? release.date}</p>
       <p>{release.summary}</p>
       <div className="read-grid">
         <ReadCard label="job">{release.job}</ReadCard>
@@ -303,6 +304,12 @@ export default function App() {
     if (!needle) return releases;
     return releases.filter((release) => JSON.stringify(release).toLowerCase().includes(needle));
   }, [query]);
+  const openRelease = (id) => {
+    setSelectedId(id);
+    window.setTimeout(() => {
+      document.getElementById('selected-release-detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
+  };
 
   return (
     <main>
@@ -349,13 +356,14 @@ export default function App() {
           <div>
             <p className="eyebrow">release archive</p>
             <h2>Released songs and active details.</h2>
-            <p className="section-copy">For the album-by-album roadmap, use the Full-Length Albums section above. This archive focuses on released and active release-page details.</p>
+            <p className="section-copy">Open a release to see the detail panel directly below, including release date, public read, hidden read, files, and notes.</p>
           </div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search releases, files, roles..." />
         </div>
+        <ReleaseDetail release={selected} compact />
         <div className="grid three">
           {filtered.map((release) => (
-            <ReleaseCard key={release.id} release={release} active={release.id === selectedId} onSelect={setSelectedId} />
+            <ReleaseCard key={release.id} release={release} active={release.id === selectedId} onSelect={openRelease} />
           ))}
         </div>
       </section>
