@@ -27,13 +27,12 @@ function StoryOverview() {
       </SectionIntro>
       <div className="grid three">
         <article className="card callout">
-          <p className="eyebrow">current status</p>
-          <h3>{story.currentStatus}</h3>
+          <p className="eyebrow">one-line story</p>
+          <h3>{story.oneLineStory}</h3>
         </article>
         <article className="card callout">
-          <p className="eyebrow">simple surface</p>
-          <h3>Separate artists. Separate sounds.</h3>
-          <p>The site should be easy first. A visitor can understand each artist without knowing the hidden split.</p>
+          <p className="eyebrow">current status</p>
+          <h3>{story.currentStatus}</h3>
         </article>
         <article className="card callout">
           <p className="eyebrow">hidden layer</p>
@@ -45,16 +44,43 @@ function StoryOverview() {
   );
 }
 
+function VisitorPath() {
+  return (
+    <section id="guide">
+      <SectionIntro eyebrow="reading guide" title="How to understand the project." >
+        {story.audiencePromise}
+      </SectionIntro>
+      <div className="grid three">
+        {story.visitorPath.map((item) => (
+          <article className="card" key={item.title}>
+            <p className="eyebrow">{item.label}</p>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function PersonaGrid() {
   return (
     <section id="personas">
       <SectionIntro eyebrow="who is who" title="Four roles, explained simply." />
       <div className="grid four">
         {story.personas.map((persona) => (
-          <article className="card" key={persona.name}>
+          <article className="card persona-card" key={persona.name}>
             <p className="eyebrow">{persona.simple}</p>
             <h3>{persona.name}</h3>
             <p>{persona.explanation}</p>
+            <dl>
+              <dt>Public face</dt>
+              <dd>{persona.publicFace}</dd>
+              <dt>Hidden role</dt>
+              <dd>{persona.hiddenRole}</dd>
+              <dt>Sound</dt>
+              <dd>{persona.sound}</dd>
+            </dl>
           </article>
         ))}
       </div>
@@ -81,6 +107,22 @@ function ConnectionMap() {
   );
 }
 
+function HiddenMechanics() {
+  return (
+    <section id="mechanics">
+      <SectionIntro eyebrow="hidden mechanics" title="What to notice as the project grows." />
+      <div className="grid four">
+        {story.hiddenMechanics.map((item) => (
+          <article className="card" key={item.title}>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ReleaseCard({ release, onSelect, active }) {
   return (
     <article className={`card release-card ${active ? 'active-card' : ''}`}>
@@ -91,8 +133,17 @@ function ReleaseCard({ release, onSelect, active }) {
       <p className="eyebrow">{release.phase}</p>
       <h3>{release.title}</h3>
       <p className="muted">{release.date}</p>
-      <p>{release.summary}</p>
+      <p>{release.job ?? release.summary}</p>
       <button onClick={() => onSelect(release.id)}>Open details</button>
+    </article>
+  );
+}
+
+function ReadCard({ label, children }) {
+  return (
+    <article className="read-card">
+      <p className="eyebrow">{label}</p>
+      <p>{children}</p>
     </article>
   );
 }
@@ -109,6 +160,11 @@ function ReleaseDetail({ release }) {
       <h2>{release.title}</h2>
       <p className="muted">{release.date}</p>
       <p>{release.summary}</p>
+      <div className="read-grid">
+        <ReadCard label="job">{release.job}</ReadCard>
+        <ReadCard label="public read">{release.audienceRead}</ReadCard>
+        <ReadCard label="hidden read">{release.hiddenRead}</ReadCard>
+      </div>
       <p className="lineage">{release.lineage}</p>
       <div className="tabs" aria-label="Release detail tabs">
         {Object.entries(releaseTabLabels).map(([key, label]) => (
@@ -129,12 +185,23 @@ function Rules() {
   return (
     <section id="rules">
       <SectionIntro eyebrow="site rules" title="Keep the public page clear." />
-      <div className="card">
-        <ul className="rules-list">
-          {story.rules.map((rule) => (
-            <li key={rule}>{rule}</li>
-          ))}
-        </ul>
+      <div className="grid two">
+        <div className="card">
+          <h3>Public page rules</h3>
+          <ul className="rules-list">
+            {story.rules.map((rule) => (
+              <li key={rule}>{rule}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="card">
+          <h3>Rollout priorities</h3>
+          <ul className="rules-list">
+            {story.rolloutPriorities.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
@@ -159,6 +226,7 @@ export default function App() {
         </div>
         <div className="nav-links">
           <a href="#story">Story</a>
+          <a href="#guide">Guide</a>
           <a href="#personas">Personas</a>
           <a href="#connections">Connections</a>
           <a href="#releases">Releases</a>
@@ -180,15 +248,17 @@ export default function App() {
       </section>
 
       <StoryOverview />
+      <VisitorPath />
       <PersonaGrid />
       <ConnectionMap />
+      <HiddenMechanics />
 
       <section id="releases">
         <div className="section-head split">
           <div>
             <p className="eyebrow">release archive</p>
             <h2>Each release has one clear job.</h2>
-            <p className="section-copy">Open a release to see its lyrics note, meaning, album role, project role, file notes, and canon notes.</p>
+            <p className="section-copy">Open a release to see its job, public read, hidden read, lyrics note, meaning, album role, project role, file notes, and canon notes.</p>
           </div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search releases, files, roles..." />
         </div>
