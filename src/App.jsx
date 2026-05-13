@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { releases, releaseTabLabels } from './data/releases';
 import { story } from './data/story';
+import { albums, getAlbumStats } from './data/albums';
+import { clues } from './data/clues';
 import './styles.css';
 
 function Badge({ children, tone = 'default' }) {
@@ -123,6 +125,91 @@ function HiddenMechanics() {
   );
 }
 
+function CluesPage() {
+  return (
+    <section id="clues">
+      <SectionIntro eyebrow="clue archive" title="Clues that uncover the hidden meanings." >
+        Each clue can be read on the surface first, then as part of the deeper connection between the songs and artists.
+      </SectionIntro>
+      <div className="clue-grid">
+        {clues.map((clue) => (
+          <article className="card clue-card" key={clue.id}>
+            <h3>{clue.title}</h3>
+            <div className="badges">
+              {clue.visibleIn.map((item) => <Badge key={item}>{item}</Badge>)}
+            </div>
+            <dl>
+              <dt>Surface clue</dt>
+              <dd>{clue.surface}</dd>
+              <dt>Hidden meaning</dt>
+              <dd>{clue.hidden}</dd>
+              <dt>What it reveals</dt>
+              <dd>{clue.reveals}</dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function AlbumStatus({ album }) {
+  const stats = getAlbumStats(album);
+  return (
+    <article className="card album-card">
+      <div className="album-head">
+        <div>
+          <p className="eyebrow">{album.artist}</p>
+          <h3>{album.title}</h3>
+        </div>
+        <Badge tone={stats.remainingToRelease === 0 ? 'released' : 'planned'}>{stats.percentReleased}% released</Badge>
+      </div>
+      <p>{album.story}</p>
+      <p className="muted">{album.connection}</p>
+      <div className="progress-wrap" aria-label={`${album.title} completion`}>
+        <div className="progress-bar" style={{ width: `${stats.percentReleased}%` }} />
+      </div>
+      <div className="stat-grid">
+        <ReadCard label="released">{stats.released} / {album.totalTracks}</ReadCard>
+        <ReadCard label="planned">{stats.planned}</ReadCard>
+        <ReadCard label="remain to release">{stats.remainingToRelease}</ReadCard>
+        <ReadCard label="remain to write">{stats.remainingToWrite}</ReadCard>
+      </div>
+      <ol className="track-list">
+        {album.tracks.map((track) => (
+          <li key={`${album.id}-${track.n}`}>
+            <div>
+              <strong>{track.n}. {track.title}</strong>
+              <p>{track.role}</p>
+            </div>
+            <Badge tone={track.status === 'Released' ? 'released' : track.status === 'Planned' ? 'planned' : 'default'}>{track.status}</Badge>
+          </li>
+        ))}
+      </ol>
+    </article>
+  );
+}
+
+function AlbumsPage() {
+  const totalTracks = albums.reduce((sum, album) => sum + album.totalTracks, 0);
+  const released = albums.reduce((sum, album) => sum + getAlbumStats(album).released, 0);
+  const remaining = totalTracks - released;
+  return (
+    <section id="albums">
+      <SectionIntro eyebrow="full-length albums" title="Three complete stories that connect." >
+        Each artist gets a full-length album arc. Released tracks are locked; unwritten titles are working story slots that show what remains to complete the trilogy.
+      </SectionIntro>
+      <div className="card trilogy-card">
+        <p className="eyebrow">trilogy status</p>
+        <h3>{released} of {totalTracks} songs released. {remaining} songs remain to release the full three-album story.</h3>
+      </div>
+      <div className="album-grid">
+        {albums.map((album) => <AlbumStatus album={album} key={album.id} />)}
+      </div>
+    </section>
+  );
+}
+
 function ReleaseCard({ release, onSelect, active }) {
   return (
     <article className={`card release-card ${active ? 'active-card' : ''}`}>
@@ -229,6 +316,8 @@ export default function App() {
           <a href="#guide">Guide</a>
           <a href="#personas">Personas</a>
           <a href="#connections">Connections</a>
+          <a href="#clues">Clues</a>
+          <a href="#albums">Albums</a>
           <a href="#releases">Releases</a>
         </div>
       </nav>
@@ -251,14 +340,16 @@ export default function App() {
       <VisitorPath />
       <PersonaGrid />
       <ConnectionMap />
+      <CluesPage />
       <HiddenMechanics />
+      <AlbumsPage />
 
       <section id="releases">
         <div className="section-head split">
           <div>
             <p className="eyebrow">release archive</p>
-            <h2>Each release has one clear job.</h2>
-            <p className="section-copy">Open a release to see its job, public read, hidden read, lyrics note, meaning, album role, project role, file notes, and canon notes.</p>
+            <h2>Released songs and active details.</h2>
+            <p className="section-copy">For the album-by-album roadmap, use the Full-Length Albums section above. This archive focuses on released and active release-page details.</p>
           </div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search releases, files, roles..." />
         </div>
