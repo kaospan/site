@@ -59,6 +59,7 @@ input { min-width: min(100%, 360px); border-radius: 16px; }
 .release-card button { margin-top: auto; align-self: flex-start; }
 .active-card { border-color: rgba(253, 224, 71, .75); }
 .detail-card { min-height: 520px; }
+.inline-detail { margin-bottom: 18px; border-color: rgba(253, 224, 71, .45); scroll-margin-top: 96px; }
 .lineage { border-left: 3px solid var(--gold); padding-left: 12px; color: #fef3c7; }
 .read-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
 .read-card { border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(0,0,0,.25); }
@@ -88,6 +89,7 @@ dd { margin: 0 0 8px; color: #e8e8e8; line-height: 1.55; }
 .track-list li { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: start; padding: 14px; border: 1px solid var(--line); border-radius: 18px; background: rgba(0,0,0,.22); }
 .track-list strong { color: var(--text); }
 .track-list p { margin: 6px 0 0; color: var(--muted); }
+.track-date { color: #fef3c7 !important; font-size: 13px; }
 .rules-list { margin: 0; padding-left: 20px; color: #e8e8e8; line-height: 1.8; }
 section { margin-bottom: 62px; scroll-margin-top: 96px; }
 @media (max-width: 1050px) {
