@@ -65,6 +65,21 @@ input { min-width: min(100%, 360px); border-radius: 16px; }
 .read-card { border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(0,0,0,.25); }
 .read-card p { margin: 0; }
 .read-card .eyebrow { margin-bottom: 8px; }
+.lyrics-toggle { margin: 12px 0; }
+.lyrics-toggle button { border-radius: 14px; padding: 8px 12px; font-size: 14px; }
+.lyrics-panel {
+  margin: 12px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(0,0,0,.34);
+  color: #f4f4f5;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 13px;
+}
 .tabs { margin: 22px 0 14px; }
 .panel { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: rgba(0,0,0,.28); }
 .persona-card dl, .clue-card dl { margin: 18px 0 0; display: grid; gap: 8px; }
