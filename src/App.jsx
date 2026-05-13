@@ -3,6 +3,7 @@ import { releases, releaseTabLabels } from './data/releases';
 import { story } from './data/story';
 import { albums, getAlbumStats } from './data/albums';
 import { clues } from './data/clues';
+import { trilogy } from './data/trilogy';
 import './styles.css';
 
 function Badge({ children, tone = 'default' }) {
@@ -44,6 +45,52 @@ function LyricsToggle({ item, label = 'Lyrics' }) {
       </button>
       {open && <pre className="lyrics-panel">{lyrics}</pre>}
     </div>
+  );
+}
+
+function TrilogyOverview() {
+  return (
+    <section id="trilogy">
+      <SectionIntro eyebrow="trilogy overview" title={trilogy.title}>
+        {trilogy.premise}
+      </SectionIntro>
+      <div className="story-block hidden-truth">
+        <p className="eyebrow">one hidden truth</p>
+        <p>{trilogy.hiddenTruth}</p>
+      </div>
+      <div className="grid three">
+        {trilogy.surfaceStories.map((item) => (
+          <article className="card trilogy-story-card" key={item.artist}>
+            <p className="eyebrow">{item.role}</p>
+            <h3>{item.artist} — {item.album}</h3>
+            <p>{item.hook}</p>
+            <dl>
+              <dt>Beginning</dt>
+              <dd>{item.beginning}</dd>
+              <dt>Middle</dt>
+              <dd>{item.middle}</dd>
+              <dt>Twist</dt>
+              <dd>{item.twist}</dd>
+              <dt>Ending</dt>
+              <dd>{item.ending}</dd>
+              <dt>Hidden connection</dt>
+              <dd>{item.hiddenConnection}</dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+      <div className="timeline trilogy-arc">
+        {trilogy.combinedArc.map((item) => (
+          <article className="step" key={item.step}>
+            <span>{item.step}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -366,9 +413,9 @@ export default function App() {
         </div>
         <div className="nav-links">
           <a href="#story">Story</a>
+          <a href="#trilogy">Trilogy</a>
           <a href="#guide">Guide</a>
           <a href="#personas">Personas</a>
-          <a href="#connections">Connections</a>
           <a href="#clues">Clues</a>
           <a href="#albums">Albums</a>
           <a href="#releases">Releases</a>
@@ -390,6 +437,7 @@ export default function App() {
       </section>
 
       <StoryOverview />
+      <TrilogyOverview />
       <VisitorPath />
       <PersonaGrid />
       <ConnectionMap />
