@@ -21,6 +21,32 @@ function SectionIntro({ eyebrow, title, children }) {
   );
 }
 
+function getReleaseForTitle(title) {
+  return releases.find((release) => release.title.toLowerCase() === title.toLowerCase());
+}
+
+function getLyricsText(item) {
+  if (item?.lyricsFull) return item.lyricsFull;
+  if (item?.tabs?.lyrics) return item.tabs.lyrics;
+  const matchedRelease = item?.title ? getReleaseForTitle(item.title) : null;
+  if (matchedRelease?.lyricsFull) return matchedRelease.lyricsFull;
+  if (matchedRelease?.tabs?.lyrics) return matchedRelease.tabs.lyrics;
+  return 'Full lyrics are not added to the site yet. Add approved final lyrics here after the song is locked.';
+}
+
+function LyricsToggle({ item, label = 'Lyrics' }) {
+  const [open, setOpen] = useState(false);
+  const lyrics = getLyricsText(item);
+  return (
+    <div className="lyrics-toggle">
+      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
+        {open ? 'Hide lyrics' : `Show ${label.toLowerCase()}`}
+      </button>
+      {open && <pre className="lyrics-panel">{lyrics}</pre>}
+    </div>
+  );
+}
+
 function StoryOverview() {
   return (
     <section id="story">
@@ -182,6 +208,7 @@ function AlbumStatus({ album }) {
               <strong>{track.n}. {track.title}</strong>
               <p className="track-date">Release date: {track.releaseDate}</p>
               <p>{track.role}</p>
+              <LyricsToggle item={track} label="lyrics" />
             </div>
             <Badge tone={track.status === 'Released' ? 'released' : track.status === 'Planned' || track.status === 'Locked soon' ? 'planned' : 'default'}>{track.status}</Badge>
           </li>
@@ -222,6 +249,7 @@ function ReleaseCard({ release, onSelect, active }) {
       <h3>{release.title}</h3>
       <p className="muted">Release date: {release.releaseDate ?? release.date}</p>
       <p>{release.job ?? release.summary}</p>
+      <LyricsToggle item={release} label="lyrics" />
       <button onClick={() => onSelect(release.id)}>Open details</button>
     </article>
   );
@@ -248,6 +276,7 @@ function ReleaseDetail({ release, compact = false }) {
       <h2>{release.title}</h2>
       <p className="muted">Release date: {release.releaseDate ?? release.date}</p>
       <p>{release.summary}</p>
+      <LyricsToggle item={release} label="lyrics" />
       <div className="read-grid">
         <ReadCard label="job">{release.job}</ReadCard>
         <ReadCard label="public read">{release.audienceRead}</ReadCard>
@@ -356,7 +385,7 @@ export default function App() {
           <div>
             <p className="eyebrow">release archive</p>
             <h2>Released songs and active details.</h2>
-            <p className="section-copy">Open a release to see the detail panel directly below, including release date, public read, hidden read, files, and notes.</p>
+            <p className="section-copy">Open a release to see the detail panel directly below, including release date, lyrics, public read, hidden read, files, and notes.</p>
           </div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search releases, files, roles..." />
         </div>
