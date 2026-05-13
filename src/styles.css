@@ -96,6 +96,13 @@ dd { margin: 0 0 8px; color: #e8e8e8; line-height: 1.55; }
 .album-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .album-card { padding: 24px; }
 .album-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.story-block { margin: 18px 0; padding: 18px; border: 1px solid var(--line); border-radius: 20px; background: rgba(0,0,0,.22); }
+.story-block p:last-child { margin-bottom: 0; }
+.hidden-truth { border-color: rgba(253, 224, 71, .38); background: rgba(253, 224, 71, .07); }
+.act-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+.act-card { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: rgba(255,255,255,.045); }
+.act-card h4 { margin: 0 0 10px; font-size: 16px; line-height: 1.25; }
+.act-card p:last-child { margin-bottom: 0; }
 .trilogy-card { border-color: rgba(253, 224, 71, .45); background: rgba(253, 224, 71, .08); }
 .progress-wrap { height: 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.35); overflow: hidden; margin: 18px 0; }
 .progress-bar { height: 100%; background: var(--gold); border-radius: 999px; min-width: 3px; }
@@ -108,12 +115,12 @@ dd { margin: 0 0 8px; color: #e8e8e8; line-height: 1.55; }
 .rules-list { margin: 0; padding-left: 20px; color: #e8e8e8; line-height: 1.8; }
 section { margin-bottom: 62px; scroll-margin-top: 96px; }
 @media (max-width: 1050px) {
-  .grid.four, .clue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid.four, .clue-grid, .act-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .read-grid, .stat-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 900px) {
   .nav { align-items: flex-start; flex-direction: column; position: relative; }
-  .hero, .grid, .grid.two, .grid.three, .grid.four, .clue-grid { grid-template-columns: 1fr; }
+  .hero, .grid, .grid.two, .grid.three, .grid.four, .clue-grid, .act-grid { grid-template-columns: 1fr; }
   .section-head, .section-head.split { align-items: stretch; flex-direction: column; }
   input { width: 100%; }
   .album-head, .track-list li { grid-template-columns: 1fr; display: grid; }
