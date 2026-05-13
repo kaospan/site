@@ -192,6 +192,23 @@ function AlbumStatus({ album }) {
       </div>
       <p>{album.story}</p>
       <p className="muted">{album.connection}</p>
+      <div className="story-block">
+        <p className="eyebrow">surface story</p>
+        <p>{album.surfaceStory}</p>
+      </div>
+      <div className="story-block hidden-truth">
+        <p className="eyebrow">underlying truth</p>
+        <p>{album.hiddenTruth}</p>
+      </div>
+      <div className="act-grid">
+        {album.acts.map((act) => (
+          <article className="act-card" key={act.label}>
+            <p className="eyebrow">{act.tracks}</p>
+            <h4>{act.label}</h4>
+            <p>{act.summary}</p>
+          </article>
+        ))}
+      </div>
       <div className="progress-wrap" aria-label={`${album.title} completion`}>
         <div className="progress-bar" style={{ width: `${stats.percentReleased}%` }} />
       </div>
@@ -225,7 +242,7 @@ function AlbumsPage() {
   return (
     <section id="albums">
       <SectionIntro eyebrow="full-length albums" title="Three complete stories that connect." >
-        Each artist gets a full-length album arc. Released tracks are locked; unwritten titles are working story slots that show what remains to complete the trilogy.
+        Each album works as its own surface thriller. Underneath, all three tell one hidden story: mask, evidence, and body memory.
       </SectionIntro>
       <div className="card trilogy-card">
         <p className="eyebrow">trilogy status</p>
