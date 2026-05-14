@@ -4,6 +4,7 @@ import { story } from './data/story';
 import { albums, getAlbumStats } from './data/albums';
 import { clues } from './data/clues';
 import { trilogy } from './data/trilogy';
+import { chronology, chronologicalReleaseIds } from './data/chronology';
 import './styles.css';
 
 function Badge({ children, tone = 'default' }) {
@@ -45,6 +46,34 @@ function LyricsToggle({ item, label = 'Lyrics' }) {
       </button>
       {open && <pre className="lyrics-panel">{lyrics}</pre>}
     </div>
+  );
+}
+
+function ChronologyPage() {
+  return (
+    <section id="chronology">
+      <SectionIntro eyebrow="chronological story" title="Read the releases in order.">
+        This is the clearest way to follow the surface story first, then notice the hidden connection between the artists.
+      </SectionIntro>
+      <div className="timeline chronology-timeline">
+        {chronology.map((item) => (
+          <article className="step chronology-step" key={`${item.order}-${item.title}`}>
+            <span>{item.order}</span>
+            <div>
+              <p className="eyebrow">{item.date} · {item.artist}</p>
+              <h3>{item.title}</h3>
+              <p className="track-date">{item.phase}</p>
+              <dl>
+                <dt>Surface story</dt>
+                <dd>{item.surface}</dd>
+                <dt>Hidden meaning</dt>
+                <dd>{item.hidden}</dd>
+              </dl>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -156,25 +185,6 @@ function PersonaGrid() {
               <dt>Sound</dt>
               <dd>{persona.sound}</dd>
             </dl>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ConnectionMap() {
-  return (
-    <section id="connections">
-      <SectionIntro eyebrow="how it connects" title="The story in order." />
-      <div className="timeline">
-        {story.howItConnects.map((item, index) => (
-          <article className="step" key={item.title}>
-            <span>{index + 1}</span>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
           </article>
         ))}
       </div>
@@ -392,11 +402,16 @@ export default function App() {
   const [selectedId, setSelectedId] = useState('i-dont-play');
   const [query, setQuery] = useState('');
   const selected = releases.find((release) => release.id === selectedId) ?? releases[0];
+  const orderedReleases = useMemo(() => {
+    return chronologicalReleaseIds
+      .map((id) => releases.find((release) => release.id === id))
+      .filter(Boolean);
+  }, []);
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (!needle) return releases;
-    return releases.filter((release) => JSON.stringify(release).toLowerCase().includes(needle));
-  }, [query]);
+    if (!needle) return orderedReleases;
+    return orderedReleases.filter((release) => JSON.stringify(release).toLowerCase().includes(needle));
+  }, [query, orderedReleases]);
   const openRelease = (id) => {
     setSelectedId(id);
     window.setTimeout(() => {
@@ -409,10 +424,11 @@ export default function App() {
       <nav className="nav">
         <div>
           <strong>PEAK UNIVERSE</strong>
-          <span>clear story map</span>
+          <span>chronological story map</span>
         </div>
         <div className="nav-links">
           <a href="#story">Story</a>
+          <a href="#chronology">Chronology</a>
           <a href="#trilogy">Trilogy</a>
           <a href="#guide">Guide</a>
           <a href="#personas">Personas</a>
@@ -437,10 +453,10 @@ export default function App() {
       </section>
 
       <StoryOverview />
+      <ChronologyPage />
       <TrilogyOverview />
       <VisitorPath />
       <PersonaGrid />
-      <ConnectionMap />
       <CluesPage />
       <HiddenMechanics />
       <AlbumsPage />
@@ -448,9 +464,9 @@ export default function App() {
       <section id="releases">
         <div className="section-head split">
           <div>
-            <p className="eyebrow">release archive</p>
-            <h2>Released songs and active details.</h2>
-            <p className="section-copy">Open a release to see the detail panel directly below, including release date, lyrics, public read, hidden read, files, and notes.</p>
+            <p className="eyebrow">chronological release archive</p>
+            <h2>Released and active records in story order.</h2>
+            <p className="section-copy">This archive follows the same chronological spine as the story above. Open a release to see the detail panel directly below.</p>
           </div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search releases, files, roles..." />
         </div>
