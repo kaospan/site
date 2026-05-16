@@ -13,9 +13,9 @@ export const chronology = [
     date: 'Feb 24, 2026',
     title: 'under my skin',
     artist: 'kaospen',
-    phase: 'The body enters early',
+    phase: 'Desire enters the system',
     surface: 'A feeling gets inside before the speaker can explain it. Fear and desire become physical.',
-    hidden: 'KAPONES is foreshadowed here. The body-memory story starts before KAPONES is public.',
+    hidden: 'The body/desire thread appears before KAPONES becomes public, but the song itself remains kaospen.',
   },
   {
     order: 3,
@@ -74,11 +74,20 @@ export const chronology = [
   {
     order: 9,
     date: 'TBD',
-    title: 'Can’t Shake Me Off',
-    artist: 'KAPONES feat. kaospen',
-    phase: 'The body arrives publicly',
-    surface: 'KAPONES enters as rhythm, room pressure, and residue that will not leave.',
-    hidden: 'The body reveals what PEAKSON suppressed and what kaospen could document but not fully feel.',
+    title: "CAN'T SHAKE ME OFF",
+    artist: 'kaospen',
+    phase: 'Persistence and scurry',
+    surface: 'kaospen cannot be removed from the emotional or psychological aftermath.',
+    hidden: 'This is an all-caps kaospen record tied to fixation, system persistence, and The Flame — not a KAPONES track.',
+  },
+  {
+    order: 10,
+    date: 'TBD / verify public listing',
+    title: 'FUN IS SUN',
+    artist: 'KAPONES',
+    phase: 'The body arrives in Portuguese',
+    surface: 'KAPONES enters through Portuguese rhythm, sex, body, heat, and movement.',
+    hidden: 'KAPONES is not the money man. He is the Brazilian-coded body/desire persona that contrasts kaospen’s system control.',
   },
 ];
 
@@ -92,4 +101,5 @@ export const chronologicalReleaseIds = [
   'i-dont-play',
   'borrowed-light',
   'cant-shake-me-off',
+  'fun-is-sun',
 ];
