@@ -443,6 +443,7 @@ export default function App() {
           <p className="eyebrow">current canon</p>
           <h1>I Don’t Play is released.</h1>
           <p>{story.shortVersion}</p>
+          <p className="muted">{story.worldToMake}</p>
           <div className="badges">
             <Badge tone="released">PEAKSON</Badge>
             <Badge>post-release phase</Badge>

@@ -2,6 +2,8 @@ export const story = {
   headline: 'A clean public image starts to crack.',
   shortVersion:
     'PEAKSON, kaospen, and KAPONES look like separate artists. Under the surface, they are three expressions of one pressure system: control, system evidence, and Portuguese body/desire.',
+  worldToMake:
+    'This is a world to make: separate artists on the surface, one pressure system underneath.',
   currentStatus:
     'I Don’t Play is the active released PEAKSON statement. FUN IS SUN is the released KAPONES entry. CAN’T SHAKE ME OFF is a planned kaospen song, not KAPONES.',
   coreIdea:
